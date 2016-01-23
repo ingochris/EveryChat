@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<html>
+<body>
+
+<p id="demo"></p>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<script>
+var x = document.getElementById("demo");
+
+function getLocation() {
+    console.log ('runs');
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+getLocation();
+
+function showPosition(position) 
+// {
+//     x.innerHTML = "Latitude: " + position.coords.latitude + 
+//     "<br>Longitude: " + position.coords.longitude;	
+// }
+
+$.ajax({
+  method: "POST",
+  url: "/submitCoords",
+  data: { lat: position.coords.latitude, lon: position.coords.longitude }
+})
+  .done(function( msg ) {
+    alert( "Data Saved: " + msg );
+  });
+
+</script>
+
+</body>
+</html>
