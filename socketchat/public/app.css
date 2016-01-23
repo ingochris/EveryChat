@@ -1,5 +1,18 @@
-.lsidebar {
-    top: 64px;
-    bottom: 0;
-    position: absolute;
+.low-row {
+    position: relative;
+    bottom: 1px;
 }
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+ }
+
+ main {
+     flex: 1 0 auto;
+ }
+
+ .page-footer {
+     background-color: white !important;
+ }

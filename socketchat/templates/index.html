@@ -1,29 +1,35 @@
 {% extends "base.html" %}
 
 {% block content %}
-<nav class='blue darken-3'>
-    <div class='container'>
-        <div class="nav-wrapper">
-            <a href="#" class="brand-logo">EveryChat</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li>Current Location</li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-<div class='row'>
-    <div class='col s2 blue lsidebar'>
+<header>
+    <nav class='blue darken-3'>
         <div class='container'>
-            <ul>
-                <li><h2>Hello</h2></li>
-                <li><h2>There!</h2></li>
-            </ul>
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo">EveryChat</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li>Current Location</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<main>
+    <div class='container'>
+        <p>Hello there ppl i need slep</p>
+    </div>
+</main>
+
+<footer class='page-footer'>
+    <div class='container'>
+        <div class='row'>
+            <div class='col s9'>
+                <input type='text' id='chatInput'>
+
+            </div>
+            <div class='col s2'>
+                <a href="#" class='btn blue'>Send</a>
+            </div>
         </div>
     </div>
-    <div class='col s10'>
-        bla
-    </div>
-</div>
-
+</footer>
 {% endblock %}
