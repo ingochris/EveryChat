@@ -4,7 +4,6 @@
   "description": "chat",
   "dependencies": {
     "express": "^4.13.4",
-    "nunjucks": "^2.3.0",
     "socket.io": "^1.4.4"
   }
 }
