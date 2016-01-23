@@ -10,15 +10,15 @@ var request = require('request');
 
 var cookie = '__cfduid=d206d66fb1528ae4f3fdf89f92b1b43b21453534817; yid=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOiI1MDZFMkVFQS1BNkFCLTRDM0YtOTNBNi03Q0RCQzQwNUU4MjEiLCJpYXQiOjE0NTM1ODA3ODYsImV4cCI6MTQ1MzU4MjU4NiwiaXNzIjoieWlreWFrLmNvbSIsInN1YiI6InNwaWRlcnlhayJ9.nOttcIiP3shWULaktL7P80eAJd8bl6g3y0e0eVQIhkk; rm=true';
 var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOiI1MDZFMkVFQS1BNkFCLTRDM0YtOTNBNi03Q0RCQzQwNUU4MjEiLCJpYXQiOjE0NTM1ODA3ODYsImV4cCI6MTQ1MzU4MjU4NiwiaXNzIjoieWlreWFrLmNvbSIsInN1YiI6InNwaWRlcnlhayJ9.nOttcIiP3shWULaktL7P80eAJd8bl6g3y0e0eVQIhkk';
-// curl "https://yikyak.com/api/proxy/v1/messages/all/new?userLat=39.951603899999995&userLong=-75.1910723&lat=39.951603899999995&long=-75.1910723&myHerd=0" 
-// -H "Accept-Encoding: gzip, deflate, sdch" 
-// -H "Accept-Language: en-US,en;q=0.8" 
-// -H "User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36" 
-// -H "Accept: application/json, text/plain, */*" 
-// -H "Referer: https://yikyak.com/nearby/new" 
-// -H "Cookie: __cfduid=d206d66fb1528ae4f3fdf89f92b1b43b21453534817; yid=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOiI1MDZFMkVFQS1BNkFCLTRDM0YtOTNBNi03Q0RCQzQwNUU4MjEiLCJpYXQiOjE0NTM1NzUzNjksImV4cCI6MTQ1MzU3NzE2OSwiaXNzIjoieWlreWFrLmNvbSIsInN1YiI6InNwaWRlcnlhayJ9.i9mQjuGXLJtlF--Z2F8swZkKZY4zDSo1i6a-Wd_3QqY; rm=true" 
-// -H "Connection: keep-alive" 
-// -H "x-access-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOiI1MDZFMkVFQS1BNkFCLTRDM0YtOTNBNi03Q0RCQzQwNUU4MjEiLCJpYXQiOjE0NTM1NzUzNjksImV4cCI6MTQ1MzU3NzE2OSwiaXNzIjoieWlreWFrLmNvbSIsInN1YiI6InNwaWRlcnlhayJ9.i9mQjuGXLJtlF--Z2F8swZkKZY4zDSo1i6a-Wd_3QqY" 
+// curl "https://yikyak.com/api/proxy/v1/messages/all/new?userLat=39.951603899999995&userLong=-75.1910723&lat=39.951603899999995&long=-75.1910723&myHerd=0"
+// -H "Accept-Encoding: gzip, deflate, sdch"
+// -H "Accept-Language: en-US,en;q=0.8"
+// -H "User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36"
+// -H "Accept: application/json, text/plain, */*"
+// -H "Referer: https://yikyak.com/nearby/new"
+// -H "Cookie: __cfduid=d206d66fb1528ae4f3fdf89f92b1b43b21453534817; yid=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOiI1MDZFMkVFQS1BNkFCLTRDM0YtOTNBNi03Q0RCQzQwNUU4MjEiLCJpYXQiOjE0NTM1NzUzNjksImV4cCI6MTQ1MzU3NzE2OSwiaXNzIjoieWlreWFrLmNvbSIsInN1YiI6InNwaWRlcnlhayJ9.i9mQjuGXLJtlF--Z2F8swZkKZY4zDSo1i6a-Wd_3QqY; rm=true"
+// -H "Connection: keep-alive"
+// -H "x-access-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOiI1MDZFMkVFQS1BNkFCLTRDM0YtOTNBNi03Q0RCQzQwNUU4MjEiLCJpYXQiOjE0NTM1NzUzNjksImV4cCI6MTQ1MzU3NzE2OSwiaXNzIjoieWlreWFrLmNvbSIsInN1YiI6InNwaWRlcnlhayJ9.i9mQjuGXLJtlF--Z2F8swZkKZY4zDSo1i6a-Wd_3QqY"
 // -H "Cache-Control: max-age=0" --compressed
 var lat;
 var lon;
@@ -67,22 +67,22 @@ function go(callback) {
                         'Cookie': cookie,
                         'Accept-Encoding': 'gzip, deflate, sdch',
                         'Accept-Language': 'en-US,en;q=0.8',
-                        'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36', 
-                        'Accept': 'application/json, text/plain, */*',           
+                        'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36',
+                        'Accept': 'application/json, text/plain, */*',
                         'Referer': 'https://yikyak.com/nearby/new',
                         'Connection': 'keep-alive',
                 }
         }, callback)
 }
 
-// curl "https://yikyak.com/api/proxy/v1/messages/all/new?userLat=39.9516862&userLong=-75.1911792&lat=39.9516862&long=-75.1911792&myHerd=0" -H 
-// "Accept-Encoding: gzip, deflate, sdch" -H 
-// "Accept-Language: en-US,en;q=0.8" -H 
-// "User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36" -H 
-// "Accept: application/json, text/plain, */*" 
-// -H "Referer: https://yikyak.com/nearby/new" 
-// -H "Cookie: __cfduid=d206d66fb1528ae4f3fdf89f92b1b43b21453534817; yid=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOiI1MDZFMkVFQS1BNkFCLTRDM0YtOTNBNi03Q0RCQzQwNUU4MjEiLCJpYXQiOjE0NTM1NTk5NjUsImV4cCI6MTQ1MzU2MTc2NSwiaXNzIjoieWlreWFrLmNvbSIsInN1YiI6InNwaWRlcnlhayJ9.9AvyllCHKkcZe4Jvdw9S_HdeHSfioKtJlUmu02WV0_E; rm=true" 
-// -H "Connection: keep-alive" 
+// curl "https://yikyak.com/api/proxy/v1/messages/all/new?userLat=39.9516862&userLong=-75.1911792&lat=39.9516862&long=-75.1911792&myHerd=0" -H
+// "Accept-Encoding: gzip, deflate, sdch" -H
+// "Accept-Language: en-US,en;q=0.8" -H
+// "User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36" -H
+// "Accept: application/json, text/plain, */*"
+// -H "Referer: https://yikyak.com/nearby/new"
+// -H "Cookie: __cfduid=d206d66fb1528ae4f3fdf89f92b1b43b21453534817; yid=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOiI1MDZFMkVFQS1BNkFCLTRDM0YtOTNBNi03Q0RCQzQwNUU4MjEiLCJpYXQiOjE0NTM1NTk5NjUsImV4cCI6MTQ1MzU2MTc2NSwiaXNzIjoieWlreWFrLmNvbSIsInN1YiI6InNwaWRlcnlhayJ9.9AvyllCHKkcZe4Jvdw9S_HdeHSfioKtJlUmu02WV0_E; rm=true"
+// -H "Connection: keep-alive"
 // -H "x-access-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOiI1MDZFMkVFQS1BNkFCLTRDM0YtOTNBNi03Q0RCQzQwNUU4MjEiLCJpYXQiOjE0NTM1NTk5NjUsImV4cCI6MTQ1MzU2MTc2NSwiaXNzIjoieWlreWFrLmNvbSIsInN1YiI6InNwaWRlcnlhayJ9.9AvyllCHKkcZe4Jvdw9S_HdeHSfioKtJlUmu02WV0_E" --compressed
 
 app.use(bodyParser.json()   );  // support JSON encoded bodies
@@ -117,5 +117,3 @@ app.post("/submitCoords", function(req, res) {
 })
 
 });
-
-app.listen(80);
