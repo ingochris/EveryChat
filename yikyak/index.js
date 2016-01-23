@@ -3,8 +3,8 @@ var express = require('express');
 var request = require('request');
 var app = express();
 
-var cookie = '$cookie'
-var token = '$token'
+var cookie = '__cfduid=d206d66fb1528ae4f3fdf89f92b1b43b21453534817; yid=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOiI1MDZFMkVFQS1BNkFCLTRDM0YtOTNBNi03Q0RCQzQwNUU4MjEiLCJpYXQiOjE0NTM1NDA4OTEsImV4cCI6MTQ1MzU0MjY5MSwiaXNzIjoieWlreWFrLmNvbSIsInN1YiI6InNwaWRlcnlhayJ9.zxpZDlFUl13DZAtf5Pphlb7eGGacckqE1260gxRbcTM; rm=true'
+var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOiI1MDZFMkVFQS1BNkFCLTRDM0YtOTNBNi03Q0RCQzQwNUU4MjEiLCJpYXQiOjE0NTM1NDA4OTEsImV4cCI6MTQ1MzU0MjY5MSwiaXNzIjoieWlreWFrLmNvbSIsInN1YiI6InNwaWRlcnlhayJ9.zxpZDlFUl13DZAtf5Pphlb7eGGacckqE1260gxRbcTM'
 
 var lat;
 var lon;
