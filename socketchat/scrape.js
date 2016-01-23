@@ -19,8 +19,11 @@ request('https://api.everyblock.com/content/philly/locations/19104/timeline/?tok
       console.log("latitude: " + latitude);
       var longitude = results[step].location_coordinates[0].longitude;
       console.log("longitude: " + longitude);
+      var location = results[step].location_name;
+      console.log("neighborhood: " + location);
       var date = results[step].pub_date;
       console.log("date: " + date);
+
 
    }
   }
