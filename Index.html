@@ -22,10 +22,9 @@ function getLocation() {
 getLocation();
 
 function showPosition(position) 
-// {
-//     x.innerHTML = "Latitude: " + position.coords.latitude + 
-//     "<br>Longitude: " + position.coords.longitude;	
-// }
+{
+    x.innerHTML = "Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude;	
 
 $.ajax({
   method: "POST",
@@ -35,6 +34,7 @@ $.ajax({
   .done(function( msg ) {
     alert( "Data Saved: " + msg );
   });
+}
 
 </script>
 
