@@ -1,10 +1,20 @@
-var app = require('express')();
+var express = require('express');
+
+var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var nunjucks = require('nunjucks');
+
+nunjucks.configure('templates', {
+    autoescape: true,
+    express: app
+});
+
+app.use(express.static('public'));
+
 
 app.get('/', function(req, res){
-  //res.send('<h1>Hello world</h1>');
-  res.sendfile('index.html');
+    res.render('index.html');
 });
 
 io.on('connection', function(socket){
