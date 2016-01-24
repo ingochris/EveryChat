@@ -71,37 +71,23 @@ function go(callback) {
   console.log( "Your token: " + token );
   console.log( "Your latitude: " + lat );
   console.log( "Your longitude: " + lon );
-
-    request.post({
-        url: 'https://www.yikyak.com/api/auth/token/refresh',
+    request({
+        url: 'https://www.yikyak.com/api/proxy/v1/messages/all/new?userLat=' + lat + '&userLong=' + lon + '&lat=' + lat + '&long=' + lon + '&myHerd=0',
+        //url: 'https://yikyak.com/api/proxy/v1/messages/all/new?userLat=39.951603899999995&userLong=-75.1910723&lat=39.951603899999995&long=-75.1910723&myHerd=0',
+        gzip: true,
         headers: {
             'x-access-token': token,
             'Referer': 'https://www.yikyak.com/nearby/new',
             'Cookie': cookie,
+            'Accept-Encoding': 'gzip, deflate, sdch',
+            'Accept-Language': 'en-US,en;q=0.8',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36',
+            'Accept': 'application/json, text/plain, */*',
+            'Referer': 'https://yikyak.com/nearby/new',
+            'Connection': 'keep-alive',
         }
-    }, function(results){
-            token = results;
-            console.log( "Your new token: " + results );
-            request({
-                url: 'https://www.yikyak.com/api/proxy/v1/messages/all/new?userLat=' + lat + '&userLong=' + lon + '&lat=' + lat + '&long=' + lon + '&myHerd=0',
-                //url: 'https://yikyak.com/api/proxy/v1/messages/all/new?userLat=39.951603899999995&userLong=-75.1910723&lat=39.951603899999995&long=-75.1910723&myHerd=0',
-                gzip: true,
-                headers: {
-                    'x-access-token': token,
-                    'Referer': 'https://www.yikyak.com/nearby/new',
-                    'Cookie': cookie,
-                    'Accept-Encoding': 'gzip, deflate, sdch',
-                    'Accept-Language': 'en-US,en;q=0.8',
-                    'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36',
-                    'Accept': 'application/json, text/plain, */*',
-                    'Referer': 'https://yikyak.com/nearby/new',
-                    'Connection': 'keep-alive',
-                }
-            }, callback);
-    });
+    }, callback);
 }
-
-
 
 // curl "https://yikyak.com/api/proxy/v1/messages/all/new?userLat=39.9516862&userLong=-75.1911792&lat=39.9516862&long=-75.1911792&myHerd=0" -H
 // "Accept-Encoding: gzip, deflate, sdch" -H
