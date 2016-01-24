@@ -123,8 +123,8 @@ function showPosition(position) {
     var lng = position.coords.longitude;
 
     codeLatLng(lat, lng, function (data) {
-        var whole_addr = data[8].formatted_address;
-        var zipcode = data[8].address_components[6].short_name;
+        var whole_addr = data[0].formatted_address;
+        var zipcode = data[0].address_components[7].short_name;
         console.log(zipcode);
         $('#zipcode').text(zipcode);
 
