@@ -3,9 +3,16 @@
   "version": "0.0.1",
   "description": "chat",
   "dependencies": {
+    "body-parser": "^1.14.2",
     "express": "^4.13.4",
+    "merge-descriptors": "^1.0.1",
     "nunjucks": "^2.3.0",
     "request": "^2.67.0",
+<<<<<<< HEAD
+    "socket.io": "^1.4.4",
+    "zlib": "^1.0.5"
+=======
     "socket.io": "^1.4.4"
+>>>>>>> 1effb172c2ea6e85a5647780fa53536999c598f3
   }
 }

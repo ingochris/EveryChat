@@ -21,6 +21,12 @@ function go(callback) {
         }, callback)
 }
 
+go(function print (error, response, body) {
+    if (!error){
+        console.log(body);
+    }
+})
+
 app.use(bodyParser.json()   );  // support JSON encoded bodies
 app.use(bodyParser.urlencoded({ // support URL encoded bodies
     extended: true
