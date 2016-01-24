@@ -65,6 +65,19 @@ socket.on('local message', function(data) {
     messages.addMessage("Anonymous", data.msg, data.color);
 });
 
+socket.on('yik yak', function(data) {
+
+    messages.addMessage("YikYak", "Message: " + data );
+
+    /*
+      Desired format:
+      Title: data.title
+      Comments: data.comment
+      Posted by: data.poster_name
+     */
+
+});
+
 socket.on('every block', function(data) {
     var message_markup = nunjucks.renderString(`
       <p>Title: {{data.title}}</p>
