@@ -140,16 +140,17 @@ function pollYikYak() {
             'Connection': 'keep-alive',
         }
     }, function(error, response, body) {
-        for ( i = 0; i < 25; i++ ){
-
+        if (!error) {
+            for ( i = 0; i < 25; i++ ){
                 newYikYak.push(JSON.parse(body)[i].message);
 
+                newYikYak.forEach(function(val, index) {
+                    if (!containsObject(val, yikyak)) {
+                        yikyak.push(val);
+                    }
+                });
 
-            newYikYak.forEach(function(val, index) {
-                if (!containsObject(val, yikyak)) {
-                    yikyak.push(val);
-                }
-            });
+            }
 
         }
     })
