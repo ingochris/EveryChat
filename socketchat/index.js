@@ -12,9 +12,12 @@ var everyblock = [];
 var everyIndex = 0;
 var id = 0;
 
+var yikyak = [];
+var yikIndex = 0;
 
-var cookie = '__cfduid=d206d66fb1528ae4f3fdf89f92b1b43b21453534817; yid=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOiI1MDZFMkVFQS1BNkFCLTRDM0YtOTNBNi03Q0RCQzQwNUU4MjEiLCJpYXQiOjE0NTM1ODA3ODYsImV4cCI6MTQ1MzU4MjU4NiwiaXNzIjoieWlreWFrLmNvbSIsInN1YiI6InNwaWRlcnlhayJ9.nOttcIiP3shWULaktL7P80eAJd8bl6g3y0e0eVQIhkk; rm=true';
-var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOiI1MDZFMkVFQS1BNkFCLTRDM0YtOTNBNi03Q0RCQzQwNUU4MjEiLCJpYXQiOjE0NTM1ODA3ODYsImV4cCI6MTQ1MzU4MjU4NiwiaXNzIjoieWlreWFrLmNvbSIsInN1YiI6InNwaWRlcnlhayJ9.nOttcIiP3shWULaktL7P80eAJd8bl6g3y0e0eVQIhkk';
+
+var cookie = '__cfduid=d206d66fb1528ae4f3fdf89f92b1b43b21453534817; yid=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOiI1MDZFMkVFQS1BNkFCLTRDM0YtOTNBNi03Q0RCQzQwNUU4MjEiLCJpYXQiOjE0NTM2MjU2NTIsImV4cCI6MTQ1MzYyNzQ1MiwiaXNzIjoieWlreWFrLmNvbSIsInN1YiI6InNwaWRlcnlhayJ9.AbBEq9Oi7DpC67LK3qPuMaWjYQc5mGW0rJrlLtoEXBw; rm=true';
+var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOiI1MDZFMkVFQS1BNkFCLTRDM0YtOTNBNi03Q0RCQzQwNUU4MjEiLCJpYXQiOjE0NTM2MjU2NTIsImV4cCI6MTQ1MzYyNzQ1MiwiaXNzIjoieWlreWFrLmNvbSIsInN1YiI6InNwaWRlcnlhayJ9.AbBEq9Oi7DpC67LK3qPuMaWjYQc5mGW0rJrlLtoEXBw';
 var lat;
 var lon;
 var socket_data = {};
@@ -57,11 +60,18 @@ io.on('connection', function(socket) {
         console.log(msg.lon);
         console.log(msg.zip);
 
-        go(function print(error, response, body) {
-            if (!error) {
-                console.log(body);
-            }
-        });
+
+        pollYikYak();
+        setInterval(pollYikYak, 10000);
+
+        setInterval(sendYikYak, 1000);
+
+
+        // go(function print(error, response, body) {
+        //     if (!error) {
+        //         console.log(body);
+        //     }
+        // });
     });
 });
 
@@ -99,7 +109,6 @@ function go(callback) {
 // -H "Connection: keep-alive"
 // -H "x-access-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOiI1MDZFMkVFQS1BNkFCLTRDM0YtOTNBNi03Q0RCQzQwNUU4MjEiLCJpYXQiOjE0NTM1NTk5NjUsImV4cCI6MTQ1MzU2MTc2NSwiaXNzIjoieWlreWFrLmNvbSIsInN1YiI6InNwaWRlcnlhayJ9.9AvyllCHKkcZe4Jvdw9S_HdeHSfioKtJlUmu02WV0_E" --compressed
 
-
 app.get("/get", function(req, res, next) {
     go(function(err, results) {
         if (err) {
@@ -112,6 +121,47 @@ app.get("/get", function(req, res, next) {
     }.bind(this));
 
 });
+
+function pollYikYak() {
+    var newYikYak = [];
+
+    request({
+        url: 'https://www.yikyak.com/api/proxy/v1/messages/all/new?userLat=' + lat + '&userLong=' + lon + '&lat=' + lat + '&long=' + lon + '&myHerd=0',
+        gzip: true,
+        headers: {
+            'x-access-token': token,
+            'Referer': 'https://www.yikyak.com/nearby/new',
+            'Cookie': cookie,
+            'Accept-Encoding': 'gzip, deflate, sdch',
+            'Accept-Language': 'en-US,en;q=0.8',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36',
+            'Accept': 'application/json, text/plain, */*',
+            'Referer': 'https://yikyak.com/nearby/new',
+            'Connection': 'keep-alive',
+        }
+    }, function(error, response, body) {
+        for ( i = 0; i < 25; i++ ){
+
+                newYikYak.push(JSON.parse(body)[i].message);
+            
+
+            newYikYak.forEach(function(val, index) {
+                if (!containsObject(val, yikyak)) {
+                    yikyak.push(val);
+                }
+            });
+
+        } 
+    })
+}
+
+function sendYikYak() {
+    if (yikIndex < yikyak.length) {
+        io.sockets.emit('yik yak', yikyak[yikIndex]);
+        yikIndex++;
+    }
+}
+
 
 
 function pollEveryBlock() {
@@ -171,7 +221,6 @@ function sendEveryBlock() {
     }
 }
 setInterval(sendEveryBlock, 1000);
-
 
 function containsObject(obj, list) {
     var i;
