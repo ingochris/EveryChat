@@ -141,17 +141,24 @@ function pollEveryBlock() {
             for (step = 0; step < 25; step++) {
                 var title = results[step].title;
                 var comment;
-                if (results[step].attributes.comment != undefined) {
-                    comment = results[step].attributes.comment;
-                } else {
-                    comment = results[step].attributes.excerpt;
-                }
+                // if (results[step].attributes.comment != undefined) {
+                //     comment = ;
+                // } else {
+                //     comment = ;
+                // }
+                comment = results[step].attributes.comment || results[step].attributes.excerpt || results[step].location_name;
 
                 var latitude = results[step].location_coordinates[0].latitude;
                 var longitude = results[step].location_coordinates[0].longitude;
                 var location = results[step].location_name;
                 var date = results[step].pub_date;
-                var user = results[step].poster_name;
+                var user;
+                if (typeof results[step].poster_name != "undefined") {
+                  user = results[step].poster_name;
+                } else {
+                  user = results[step].provider_name;
+                }
+                user = results[step].poster_name || results[step].provider_name;
 
                 newEveryblock.push({
                     title: title,

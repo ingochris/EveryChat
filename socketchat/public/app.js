@@ -1,7 +1,7 @@
 const A_MAX_MSGS = 40;
 const A_NUNJUCK_TEMPLATE = `
 {% for m in messages %}
-<div><b style='color:{{m.color}}'>{{m.username}}</b>: {{m.text}}</div>
+<p><b style='color:{{m.color}}'>{{m.username}}</b>: {{m.text | safe}}</p>
 {% endfor %}
 `;
 
@@ -23,17 +23,24 @@ var Message = Backbone.Model.extend({
         //     console.log('stuff changed');
         // });
     },
-    addMessage: function(username, messageText, color) {
+    addMessage: function(username, messageText, color, escapeText) {
+      if (!escapeText) {
+        messageText = nunjucks.renderString("{{esc | escape}}", {esc: messageText});
+
+      }
+      console.log(escapeText);
         var messages = this.get('messages');
         if (typeof messages == "undefined") {
             messages = [];
         }
+        console.log(messageText);
         messages.push({username: username, text: messageText, color: color});
         this.set('messages', messages);
         this.updateChatArea();
     },
     updateChatArea: function() {
         var messages = this.get('messages');
+
         var markup = nunjucks.renderString(A_NUNJUCK_TEMPLATE, {
             messages: messages
         });
@@ -59,8 +66,17 @@ socket.on('local message', function(data) {
 });
 
 socket.on('every block', function(data) {
-
-    messages.addMessage("EveryBlock", "Title: " + data.title + " Comment: " + data.comment + " Posted by: " + data.user);
+    var message_markup = nunjucks.renderString(`
+      <p>Title: {{data.title}}</p>
+      {% if data.comment %}
+      <p>Comment: {{data.comment}}</p>
+      {% endif %}
+     {% if data.user %}
+     <p>Posted By: {{data.user}}</p>
+     {% endif %}
+      `, {data:data})
+    messages.addMessage("EveryBlock", message_markup, "black", true);
+    
 
     /*
       Desired format:
