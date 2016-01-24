@@ -67,7 +67,7 @@ socket.on('local message', function(data) {
 
 socket.on('yik yak', function(data) {
 
-    messages.addMessage("YikYak", "Message: " + data );
+    messages.addMessage("YikYak", data );
 
     /*
       Desired format:
