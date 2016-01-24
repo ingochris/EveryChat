@@ -126,18 +126,18 @@ function pollEveryBlock() {
 
             for (step = 0; step < 25; step++) {
                 var title = results[step].title;
-                var comment; 
+                var comment;
                 if (results[step].attributes.comment != undefined) {
                     comment = results[step].attributes.comment;
                 } else {
                     comment = results[step].attributes.excerpt;
                 }
-                              
+
                 var latitude = results[step].location_coordinates[0].latitude;
                 var longitude = results[step].location_coordinates[0].longitude;
                 var location = results[step].location_name;
                 var date = results[step].pub_date;
-                
+                var user = results[step].poster_name;
 
                 newEveryblock.push({
                     title: title,
@@ -145,7 +145,8 @@ function pollEveryBlock() {
                     latitude: latitude,
                     longitude: longitude,
                     location: location,
-                    date: date
+                    date: date,
+                    user: user
                 });
             }
 
@@ -169,7 +170,7 @@ function sendEveryBlock() {
         everyIndex++;
     }
 }
-setInterval(sendEveryBlock, 30000);
+setInterval(sendEveryBlock, 1000);
 
 
 function containsObject(obj, list) {

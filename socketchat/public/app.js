@@ -1,7 +1,7 @@
 const A_MAX_MSGS = 40;
 const A_NUNJUCK_TEMPLATE = `
 {% for m in messages %}
-<p><b style='color:{{m.color}}'>{{m.username}}</b>: {{m.text}}</p>
+<div><b style='color:{{m.color}}'>{{m.username}}</b>: {{m.text}}</div>
 {% endfor %}
 `;
 
@@ -59,7 +59,16 @@ socket.on('local message', function(data) {
 });
 
 socket.on('every block', function(data) {
-    messages.addMessage("EveryBlock", data.title + "-" + data.comment);
+
+    messages.addMessage("EveryBlock", "Title: " + data.title + " Comment: " + data.comment + " Posted by: " + data.user);
+
+    /*
+      Desired format:
+      Title: data.title
+      Comments: data.comment
+      Posted by: data.poster_name
+     */
+
 });
 
 function sendMessage(msg) {
