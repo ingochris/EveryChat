@@ -169,7 +169,7 @@ function sendEveryBlock() {
         everyIndex++;
     }
 }
-setInterval(sendEveryBlock, 60000);
+setInterval(sendEveryBlock, 30000);
 
 
 function containsObject(obj, list) {

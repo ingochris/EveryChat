@@ -40,8 +40,6 @@ var Message = Backbone.Model.extend({
 
         $('#content-chat').html(markup);
         this.chatMaint();
-        console.log(messages);
-        console.log('updating chat area and shit');
     },
     chatMaint: function() {
         var messages = this.get('messages');
@@ -57,12 +55,10 @@ window.messages = new Message();
 
 
 socket.on('local message', function(data) {
-    console.log(data);
     messages.addMessage("Anonymous", data.msg, data.color);
 });
 
 socket.on('every block', function(data) {
-    console.log(data);
     messages.addMessage("EveryBlock", data.title + "-" + data.comment);
 });
 
