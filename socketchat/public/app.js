@@ -1,11 +1,20 @@
-const A_MAX_MSGS = 20;
+const A_MAX_MSGS = 40;
 const A_NUNJUCK_TEMPLATE = `
 {% for m in messages %}
-<p><b>{{m.username}}</b>: {{m.text}}</p>
+<p><b style='color:{{m.color}}'>{{m.username}}</b>: {{m.text}}</p>
 {% endfor %}
 `;
 
 var socket = io(window.location.href[-1]);
+
+function getRandomColor() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
 
 var Message = Backbone.Model.extend({
     initialize: function() {
@@ -14,15 +23,12 @@ var Message = Backbone.Model.extend({
         //     console.log('stuff changed');
         // });
     },
-    addMessage: function(username, messageText) {
+    addMessage: function(username, messageText, color) {
         var messages = this.get('messages');
         if (typeof messages == "undefined") {
             messages = [];
         }
-        messages.push({
-            username: username,
-            text: messageText
-        });
+        messages.push({username: username, text: messageText, color: color});
         this.set('messages', messages);
         this.updateChatArea();
     },
@@ -33,6 +39,9 @@ var Message = Backbone.Model.extend({
         });
 
         $('#content-chat').html(markup);
+        this.chatMaint();
+        console.log(messages);
+        console.log('updating chat area and shit');
     },
     chatMaint: function() {
         var messages = this.get('messages');
@@ -49,7 +58,7 @@ window.messages = new Message();
 
 socket.on('local message', function(data) {
     console.log(data);
-    messages.addMessage("Anonymous", data);
+    messages.addMessage("Anonymous", data.msg, data.color);
 });
 
 socket.on('every block', function(data) {
@@ -59,7 +68,9 @@ socket.on('every block', function(data) {
 
 function sendMessage(msg) {
     socket.emit('local message', msg);
-    messages.addMessage("Me", msg);
+    messages.addMessage("Me", msg, "black");
+    console.log("message sent!");
+
 }
 
 function getLocation() {
@@ -114,6 +125,7 @@ function codeLatLng(lat, lng, fn) {
         if (status == google.maps.GeocoderStatus.OK) {
             if (results[3]) {
                 var rgc = results;
+                console.log(results);
                 fn(rgc);
             }
         } else {
