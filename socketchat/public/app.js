@@ -6,7 +6,7 @@ const A_NUNJUCK_TEMPLATE = `
 `;
 
 var socket = io(window.location.href[-1]);
-
+var color = getRandomColor();
 function getRandomColor() {
     var letters = '0123456789ABCDEF'.split('');
     var color = '#';
@@ -63,7 +63,7 @@ socket.on('every block', function(data) {
 });
 
 function sendMessage(msg) {
-    socket.emit('local message', msg);
+    socket.emit('local message', {msg: msg, color: color});
     messages.addMessage("Me", msg, "black");
     console.log("message sent!");
 
@@ -91,7 +91,7 @@ function showPosition(position) {
 
         $('#waddr').text(whole_addr);
 
-        var dt = { lat: lat, lon: lng, zip: zipcode, color: getRandomColor() };
+        var dt = { lat: lat, lon: lng, zip: zipcode, color: color };
         socket.emit('IDENTIFY', dt);
     });
 }
