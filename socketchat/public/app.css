@@ -27,4 +27,5 @@ body {
 
 .right-align {
     text-align: right;
+    padding-right: 16px;
 }

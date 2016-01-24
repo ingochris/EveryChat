@@ -1,7 +1,7 @@
 const A_MAX_MSGS = 30;
 const A_NUNJUCK_TEMPLATE = `
 {% for m in messages %}
-<div class='{% if m.username == "YikYak" or m.username == "EveryBlock Updates" %}right-align{% endif %}'><b style='color:{{m.color}}' class='{{m.class}}'>{{m.username}}</b>: {{m.text | safe}}</div>
+<div class='{% if m.username == "YikYak" or m.username == "EveryBlock Updates" %}right-align{% endif %}'><p><b style='color:{{m.color}}' class='{{m.class}}'>{{m.username}}</b>: {{m.text | safe}}</p></div>
 {% endfor %}
 `;
 
@@ -47,9 +47,7 @@ var Message = Backbone.Model.extend({
 
         $('#content-chat').html(markup);
         this.chatMaint();
-        $('.con-wr').animate({
-          scrollTop: $('#bottom').offset().top
-        }, 1000);
+        $('.con-wr').scrollTo('#bottom');
     },
     chatMaint: function() {
         var messages = this.get('messages');
@@ -70,7 +68,7 @@ socket.on('local message', function(data) {
 
 socket.on('yik yak', function(data) {
 
-    messages.addMessage("YikYak", data );
+    messages.addMessage("YikYak", "<br>" + data, "black", true);
 
     /*
       Desired format:
