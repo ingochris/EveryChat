@@ -1,9 +1,63 @@
+const A_MAX_MSGS = 20;
+const A_NUNJUCK_TEMPLATE = `
+{% for m in messages %}
+<p><b>{{m.username}}</b>: {{m.text}}</p>
+{% endfor %}
+`;
+
 var socket = io(window.location.href[-1]);
-    socket.on('news', function (data) {
+
+var Message = Backbone.Model.extend({
+    initialize: function() {
+        // this.on("change", function () {
+        //     this.updateChatArea();
+        //     console.log('stuff changed');
+        // });
+    },
+    addMessage: function(username, messageText) {
+        var messages = this.get('messages');
+        if (typeof messages == "undefined") {
+            messages = [];
+        }
+        messages.push({username: username, text: messageText});
+        this.set('messages', messages);
+        this.updateChatArea();
+    },
+    updateChatArea: function() {
+        var messages = this.get('messages');
+        var markup = nunjucks.renderString(A_NUNJUCK_TEMPLATE, { messages: messages });
+
+        $('#content-chat').html(markup);
+        console.log(messages);
+        console.log('updating chat area and shit');
+    },
+    chatMaint: function() {
+        var messages = this.get('messages');
+        if (messages.length > A_MAX_MSGS) {
+            messages.shift();
+        }
+        this.set('messages', messages);
+    }
+
+});
+
+window.messages = new Message();
+
+socket.on('news', function (data) {
     console.log(data);
     socket.emit('my other event', { my: 'data' });
 });
 
+socket.on('local message', function(data) {
+    console.log(data);
+    messages.addMessage("Anonymous", data);
+});
+
+function sendMessage(msg) {
+    socket.emit('local message', msg);
+    messages.addMessage("Me", msg);
+    console.log("message sent!");
+}
 
 function getLocation() {
     if (navigator.geolocation) {
@@ -53,3 +107,11 @@ function codeLatLng(lat, lng, fn) {
     });
 }
 $(initialize);
+
+$('#chatInput').keypress(function (e) {
+    if (e.which == 13) {
+        sendMessage($('#chatInput').val());
+        $('#chatInput').val('');
+        return false;
+    }
+});

@@ -6,7 +6,7 @@
         <div class='container'>
             <div class="nav-wrapper">
                 <a href="#" class="brand-logo">EveryChat</a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li>Region: </li>
                     <li id='zipcode' class='zip'>Locating...</li>
                     <li>&nbsp; - &nbsp;</li>
@@ -18,7 +18,9 @@
 </header>
 <main>
     <div class='container'>
-        <p>Hello there ppl i need slep</p>
+        <div id='content-chat'>
+            <p>Hello there ppl i need slep</p>
+        </div>
     </div>
     <div id="map"></div>
 </main>
@@ -36,6 +38,10 @@
         </div>
     </div>
 </footer>
+<script src='/nunjucks.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.2.3/backbone-min.js'></script>
+
 
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCSNglDEBDBQRWi3QU7Klgok4708YIbLsA"></script>
 <script src='app.js'></script>
