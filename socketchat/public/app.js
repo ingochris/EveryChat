@@ -75,8 +75,8 @@ socket.on('every block', function(data) {
      <p>Posted By: {{data.user}}</p>
      {% endif %}
       `, {data:data})
-    messages.addMessage("EveryBlock", message_markup, "black", true);
-    
+    messages.addMessage("EveryBlock Updates", message_markup, "black", true);
+
 
     /*
       Desired format:
