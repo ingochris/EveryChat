@@ -5,7 +5,7 @@ EveryChat is a combination of Comcast's EveryBlock API and the Yik Yak API. We f
 
 ## Dependencies
 
-Run `bash nodesetup.sh` to install the required npm dependencies we use in our project. 
+Run `$ bash nodesetup.sh` to install the required npm dependencies we use in our project. 
 - body-parser
 - express
 - merge-descriptors
