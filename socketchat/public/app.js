@@ -47,6 +47,9 @@ var Message = Backbone.Model.extend({
 
         $('#content-chat').html(markup);
         this.chatMaint();
+        $('.con-wr').animate({
+          scrollTop: $('#bottom').offset().top
+        }, 1000);
     },
     chatMaint: function() {
         var messages = this.get('messages');
@@ -183,4 +186,4 @@ $('.btn-blue').on('click', function(e) {
     sendMessage($('#chatInput').val());
     $('#chatInput').val('');
     return false;
-})
+});
