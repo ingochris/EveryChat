@@ -19,17 +19,20 @@ var Message = Backbone.Model.extend({
         if (typeof messages == "undefined") {
             messages = [];
         }
-        messages.push({username: username, text: messageText});
+        messages.push({
+            username: username,
+            text: messageText
+        });
         this.set('messages', messages);
         this.updateChatArea();
     },
     updateChatArea: function() {
         var messages = this.get('messages');
-        var markup = nunjucks.renderString(A_NUNJUCK_TEMPLATE, { messages: messages });
+        var markup = nunjucks.renderString(A_NUNJUCK_TEMPLATE, {
+            messages: messages
+        });
 
         $('#content-chat').html(markup);
-        console.log(messages);
-        console.log('updating chat area and shit');
     },
     chatMaint: function() {
         var messages = this.get('messages');
@@ -43,20 +46,20 @@ var Message = Backbone.Model.extend({
 
 window.messages = new Message();
 
-socket.on('news', function (data) {
-    console.log(data);
-    socket.emit('my other event', { my: 'data' });
-});
 
 socket.on('local message', function(data) {
     console.log(data);
     messages.addMessage("Anonymous", data);
 });
 
+socket.on('every block', function(data) {
+    console.log(data);
+    messages.addMessage("EveryBlock", data.title + "-" + data.comment);
+});
+
 function sendMessage(msg) {
     socket.emit('local message', msg);
     messages.addMessage("Me", msg);
-    console.log("message sent!");
 }
 
 function getLocation() {
@@ -81,21 +84,33 @@ function showPosition(position) {
 
         $('#waddr').text(whole_addr);
 
-        var dt = { lat: lat, lon: lng, zip: zipcode };
+        var dt = { lat: lat, lon: lng, zip: zipcode, color: getRandomColor() };
         socket.emit('IDENTIFY', dt);
-
     });
+}
 
+function getRandomColor() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
 }
 
 
 var geocoder;
+
 function initialize() {
     geocoder = new google.maps.Geocoder();
 }
+
+
 function codeLatLng(lat, lng, fn) {
     var latlng = new google.maps.LatLng(lat, lng);
-    geocoder.geocode({'latLng': latlng}, function(results, status) {
+    geocoder.geocode({
+        'latLng': latlng
+    }, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
             if (results[3]) {
                 var rgc = results;
@@ -108,10 +123,18 @@ function codeLatLng(lat, lng, fn) {
 }
 $(initialize);
 
-$('#chatInput').keypress(function (e) {
+$('#chatInput').keypress(function(e) {
     if (e.which == 13) {
         sendMessage($('#chatInput').val());
         $('#chatInput').val('');
         return false;
     }
 });
+
+$('.btn-blue').on('click', function(e) {
+    e.preventDefault();
+
+    sendMessage($('#chatInput').val());
+    $('#chatInput').val('');
+    return false;
+})
