@@ -67,10 +67,10 @@ io.on('connection', function(socket) {
 
 
 function go(callback) {
-    // console.log(cookie);
-    // console.log(token);
-    console.log(lat);
-    console.log(lon);
+  console.log( "Your cookie: " + cookie );
+  console.log( "Your token: " + token );
+  console.log( "Your latitude: " + lat );
+  console.log( "Your longitude: " + lon );
     request({
         url: 'https://www.yikyak.com/api/proxy/v1/messages/all/new?userLat=' + lat + '&userLong=' + lon + '&lat=' + lat + '&long=' + lon + '&myHerd=0',
         //url: 'https://yikyak.com/api/proxy/v1/messages/all/new?userLat=39.951603899999995&userLong=-75.1910723&lat=39.951603899999995&long=-75.1910723&myHerd=0',
