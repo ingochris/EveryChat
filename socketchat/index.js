@@ -54,16 +54,18 @@ io.on('connection', function(socket) {
     });
     socket.on('local message', function(msg) {
         var zipcode = socket_data[socket.id].zipcode;
+        var color = socket_data[socket.id].color;
         console.log(socket_data);
 
-        console.log('dank as fuck: ' + msg);
-        socket.broadcast.to(zipcode).emit('local message', msg);
+        socket.broadcast.to(zipcode).emit('local message', {msg: msg, color: color});
     });
 
 
     socket.on('IDENTIFY', function(msg) {
         socket_data[socket.id] = {};
         socket_data[socket.id].zipcode = msg.zip;
+        socket_data[socket.id].color = msg.color;
+
         socket.join(msg.zip);
 
         console.log(msg.lat);
