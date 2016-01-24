@@ -8,8 +8,8 @@ var nunjucks = require('nunjucks');
 var bodyParser = require('body-parser');
 var request = require('request');
 
-var cookie = '__cfduid=d206d66fb1528ae4f3fdf89f92b1b43b21453534817; yid=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOiI1MDZFMkVFQS1BNkFCLTRDM0YtOTNBNi03Q0RCQzQwNUU4MjEiLCJpYXQiOjE0NTM1OTcwNDIsImV4cCI6MTQ1MzU5ODg0MiwiaXNzIjoieWlreWFrLmNvbSIsInN1YiI6InNwaWRlcnlhayJ9.YGRO-LDGDlNppNFD6aQujV6_Di-9BaBad3EMIVjvx74; rm=true';
-var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOiI1MDZFMkVFQS1BNkFCLTRDM0YtOTNBNi03Q0RCQzQwNUU4MjEiLCJpYXQiOjE0NTM1OTcwNDIsImV4cCI6MTQ1MzU5ODg0MiwiaXNzIjoieWlreWFrLmNvbSIsInN1YiI6InNwaWRlcnlhayJ9.YGRO-LDGDlNppNFD6aQujV6_Di-9BaBad3EMIVjvx74';
+var cookie = '__cfduid=d206d66fb1528ae4f3fdf89f92b1b43b21453534817; yid=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOiI1MDZFMkVFQS1BNkFCLTRDM0YtOTNBNi03Q0RCQzQwNUU4MjEiLCJpYXQiOjE0NTM2MDA2NTMsImV4cCI6MTQ1MzYwMjQ1MywiaXNzIjoieWlreWFrLmNvbSIsInN1YiI6InNwaWRlcnlhayJ9.b0txv4tCFBDYzmBQLzSfdPEidpu0V67UWG-uAXA3ADE; rm=true';
+var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOiI1MDZFMkVFQS1BNkFCLTRDM0YtOTNBNi03Q0RCQzQwNUU4MjEiLCJpYXQiOjE0NTM2MDA2NTMsImV4cCI6MTQ1MzYwMjQ1MywiaXNzIjoieWlreWFrLmNvbSIsInN1YiI6InNwaWRlcnlhayJ9.b0txv4tCFBDYzmBQLzSfdPEidpu0V67UWG-uAXA3ADE';
 // curl "https://yikyak.com/api/proxy/v1/messages/all/new?userLat=39.951603899999995&userLong=-75.1910723&lat=39.951603899999995&long=-75.1910723&myHerd=0"
 // -H "Accept-Encoding: gzip, deflate, sdch"
 // -H "Accept-Language: en-US,en;q=0.8"
@@ -95,7 +95,6 @@ app.use(bodyParser.urlencoded({ // support URL encoded bodies
     extended: true
 }));
 
-<<<<<<< HEAD
 app.get("/get", function (req, res, next) {
         go(function (err, results) {
                 if (err) {
@@ -106,30 +105,15 @@ app.get("/get", function (req, res, next) {
                 res.setHeader("Access-Control-Allow-Origin", "*");
                 res.send(JSON.parse(results.body))
             }.bind(this))
-=======
-app.get("/get", function(req, res, next) {
 
-    go(function(err, results) {
-        if (err) {
-            console.log("ERROR", err);
-        };
-
-        res.setHeader("Access-Control-Allow-Origin", "*");
-
-        res.send(JSON.parse(results.body))
-    }.bind(this))
->>>>>>> 1effb172c2ea6e85a5647780fa53536999c598f3
 });
 
 app.post("/submitCoords", function(req, res) {
     lat = req.body.lat;
     lon = req.body.lon;
-<<<<<<< HEAD
     go(function print (err, results) {
-           // console.log(request.url);
-           //console.log(results);
         results = JSON.parse(results.body);
-
+        // console.log(results);
         for ( i = 0; i < 25; i++ ){
             var yakObj = results[ i ];
             //console.log(yakObj);
@@ -143,16 +127,7 @@ app.post("/submitCoords", function(req, res) {
             console.log("Time: " + yakTime);
         }
 
-=======
-    go(function print(error, response, body) {
-        // console.log(request.url);
 
-        //console.log(error);
-        //console.log(response);
-        if (!error) {
-            console.log(body);
-        }
->>>>>>> 1effb172c2ea6e85a5647780fa53536999c598f3
     })
 
 });
