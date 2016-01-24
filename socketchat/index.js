@@ -64,7 +64,7 @@ io.on('connection', function(socket) {
         pollYikYak();
         setInterval(pollYikYak, 10000);
 
-        setInterval(sendYikYak, 1000);
+        setInterval(sendYikYak, 60000);
 
 
         // go(function print(error, response, body) {
@@ -143,7 +143,7 @@ function pollYikYak() {
         for ( i = 0; i < 25; i++ ){
 
                 newYikYak.push(JSON.parse(body)[i].message);
-            
+
 
             newYikYak.forEach(function(val, index) {
                 if (!containsObject(val, yikyak)) {
@@ -151,7 +151,7 @@ function pollYikYak() {
                 }
             });
 
-        } 
+        }
     })
 }
 
@@ -227,7 +227,7 @@ function sendEveryBlock() {
         everyIndex++;
     }
 }
-setInterval(sendEveryBlock, 1000);
+setInterval(sendEveryBlock, 15000);
 
 function containsObject(obj, list) {
     var i;
