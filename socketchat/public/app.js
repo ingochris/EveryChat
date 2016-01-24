@@ -1,7 +1,7 @@
 const A_MAX_MSGS = 30;
 const A_NUNJUCK_TEMPLATE = `
 {% for m in messages %}
-<p><b style='color:{{m.color}}'>{{m.username}}</b>: {{m.text | safe}}</p>
+<div class='{% if m.username == "YikYak" or m.username == "EveryBlock Updates" %}right-align{% endif %}'><b style='color:{{m.color}}' class='{{m.class}}'>{{m.username}}</b>: {{m.text | safe}}</div>
 {% endfor %}
 `;
 
@@ -25,7 +25,7 @@ var Message = Backbone.Model.extend({
     },
     addMessage: function(username, messageText, color, escapeText) {
       if (!escapeText) {
-        messageText = nunjucks.renderString("{{esc | escape}}", {esc: messageText});
+        messageText = nunjucks.renderString("{{esc}}", {esc: messageText});
 
       }
       console.log(escapeText);

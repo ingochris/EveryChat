@@ -24,3 +24,7 @@ body {
 .content-chat {
     overflow: auto;
 }
+
+.right-align {
+    text-align: right;
+}
