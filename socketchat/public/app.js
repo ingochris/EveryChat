@@ -49,7 +49,7 @@ var Message = Backbone.Model.extend({
         this.chatMaint();
         $('.con-wr').animate({
           scrollTop: $('#bottom').offset().top
-        }, 1000);
+        }, 0);
     },
     chatMaint: function() {
         var messages = this.get('messages');
