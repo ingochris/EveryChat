@@ -1,4 +1,5 @@
 var request = require('request');
+
 request('https://api.everyblock.com/content/philly/locations/19104/timeline/?token=d57c38793098b0e9a92adee4ee9ca7b20a8fb036', function (error, response, body) {
   if (!error && response.statusCode == 200) {
     console.log(body) // Show the HTML for the Google homepage.
@@ -6,6 +7,7 @@ request('https://api.everyblock.com/content/philly/locations/19104/timeline/?tok
     body = JSON.parse(body);
     var results = body.results;
     var step;
+
     for (step = 0; step < 25; step++) {
       var title = results[step].title;
       console.log("title: " + title);
