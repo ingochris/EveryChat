@@ -14,27 +14,27 @@ function getLocation() {
     console.log ('runs');
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
-    } else { 
+    } else {
         x.innerHTML = "Geolocation is not supported by this browser.";
     }
 }
 
 getLocation();
 
-function showPosition(position) 
+function showPosition(position)
 // {
-//     x.innerHTML = "Latitude: " + position.coords.latitude + 
-//     "<br>Longitude: " + position.coords.longitude;	
+//     x.innerHTML = "Latitude: " + position.coords.latitude +
+//     "<br>Longitude: " + position.coords.longitude;
 // }
 
 $.ajax({
-  method: "POST",
-  url: "/submitCoords",
-  data: { lat: position.coords.latitude, lon: position.coords.longitude }
+    method: "POST",
+    url: "/submitCoords",
+    data: { lat: position.coords.latitude, lon: position.coords.longitude }
 })
-  .done(function( msg ) {
+.done(function( msg ) {
     alert( "Data Saved: " + msg );
-  });
+});
 
 </script>
 

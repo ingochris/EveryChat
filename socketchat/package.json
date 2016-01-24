@@ -5,6 +5,7 @@
   "dependencies": {
     "express": "^4.13.4",
     "nunjucks": "^2.3.0",
+    "request": "^2.67.0",
     "socket.io": "^1.4.4"
   }
 }

@@ -16,3 +16,7 @@ body {
  .page-footer {
      background-color: white !important;
  }
+
+.zip {
+    font-weight: bold;
+}
