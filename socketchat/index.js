@@ -39,10 +39,10 @@ app.get('/', function(req, res) {
 io.on('connection', function(socket) {
     console.log("connection");
     socket.on('local message', function(msg) {
-        var zipcode = socket_data[socket.id].zipcode;
+        //var zipcode = socket_data[socket.id].zipcode;
         console.log(socket_data);
 
-        socket.broadcast.to(zipcode).emit('local message', msg);
+        socket.broadcast.emit('local message', msg);
     });
 
 
