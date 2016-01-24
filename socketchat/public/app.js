@@ -1,4 +1,4 @@
-const A_MAX_MSGS = 40;
+const A_MAX_MSGS = 30;
 const A_NUNJUCK_TEMPLATE = `
 {% for m in messages %}
 <p><b style='color:{{m.color}}'>{{m.username}}</b>: {{m.text | safe}}</p>
