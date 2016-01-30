@@ -16,8 +16,8 @@ var yikyak = [];
 var yikIndex = 0;
 
 
-var cookie = '__cfduid=d206d66fb1528ae4f3fdf89f92b1b43b21453534817; yid=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOiI1MDZFMkVFQS1BNkFCLTRDM0YtOTNBNi03Q0RCQzQwNUU4MjEiLCJpYXQiOjE0NTM2NDkxMTgsImV4cCI6MTQ1MzY1MDkxOCwiaXNzIjoieWlreWFrLmNvbSIsInN1YiI6InNwaWRlcnlhayJ9.nq9_Dkql9HgilYwLXkla7oiHk_01rbnSIuayoR8tGDk; rm=true';
-var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOiI1MDZFMkVFQS1BNkFCLTRDM0YtOTNBNi03Q0RCQzQwNUU4MjEiLCJpYXQiOjE0NTM2NTA5MjIsImV4cCI6MTQ1MzY1MjcyMiwiaXNzIjoieWlreWFrLmNvbSIsInN1YiI6InNwaWRlcnlhayJ9.t-T_jFbQXcbVFAnOWWGyyZfKWeNNRelygbN74xvqc1Y';
+var cookie = "$cookie"
+var token = "$token"
 var lat;
 var lon;
 var socket_data = {};
@@ -105,9 +105,9 @@ function go(callback) {
 // "User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36" -H
 // "Accept: application/json, text/plain, */*"
 // -H "Referer: https://yikyak.com/nearby/new"
-// -H "Cookie: __cfduid=d206d66fb1528ae4f3fdf89f92b1b43b21453534817; yid=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOiI1MDZFMkVFQS1BNkFCLTRDM0YtOTNBNi03Q0RCQzQwNUU4MjEiLCJpYXQiOjE0NTM1NTk5NjUsImV4cCI6MTQ1MzU2MTc2NSwiaXNzIjoieWlreWFrLmNvbSIsInN1YiI6InNwaWRlcnlhayJ9.9AvyllCHKkcZe4Jvdw9S_HdeHSfioKtJlUmu02WV0_E; rm=true"
+// -H "Cookie: cookie
 // -H "Connection: keep-alive"
-// -H "x-access-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySUQiOiI1MDZFMkVFQS1BNkFCLTRDM0YtOTNBNi03Q0RCQzQwNUU4MjEiLCJpYXQiOjE0NTM1NTk5NjUsImV4cCI6MTQ1MzU2MTc2NSwiaXNzIjoieWlreWFrLmNvbSIsInN1YiI6InNwaWRlcnlhayJ9.9AvyllCHKkcZe4Jvdw9S_HdeHSfioKtJlUmu02WV0_E" --compressed
+// -H "x-access-token: token +" --compressed"
 
 app.get("/get", function(req, res, next) {
     go(function(err, results) {
